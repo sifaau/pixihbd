@@ -275,7 +275,7 @@
   function terbang2(){
     const aliens = [];
 
-    const totalDudes = 15;
+    const totalDudes = 13;
 
     for (let i = 0; i < totalDudes; i++) {
       // create a new Sprite that uses the image name that we just generated as its source
