@@ -73,6 +73,13 @@
   //This `setup` function will run when the image has loaded
   function open() {
 
+    touchme = new PIXI.Text('Psyduck : "TOUCH ME..."', { stroke: 0xff2200 });
+    touchme.x = 100;
+    touchme.y = 200;
+    container.pivot.x = touchme.width / 2;
+    container.pivot.y = touchme.height / 2;
+    app.stage.addChild(touchme);
+
     //Create the cat sprite
     let bebek = new Sprite(resources[psyduck_image].texture);
 
@@ -98,15 +105,16 @@
     // Shows hand cursor
     bebek.buttonMode = true;
     // Pointers normalize touch and mouse
-    bebek.on('pointerdown', delta=>goToUcapan(bebek,delta));
+    bebek.on('pointerdown', delta=>goToUcapan(bebek,touchme,delta));
 
     //Add the cat to the stage
     app.stage.addChild(bebek);
     app.ticker.add(delta => gameLoop(bebek,delta));
   }
 
-  function goToUcapan(bebek,delta) {
+  function goToUcapan(bebek,touchme,delta) {
     app.stage.removeChild(bebek);
+    app.stage.removeChild(touchme);
     catchme();
   }
 
@@ -179,13 +187,10 @@
 
       if ( hitung > 6 ){
         app.stage.removeChild(bebek2);
+        app.stage.removeChild(catchme);
         ucapan();
       }
     }
-
-
-
-
 
   }
 
