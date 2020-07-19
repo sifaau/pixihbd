@@ -134,7 +134,7 @@
 
     catchme = new PIXI.Text('Psyduck : "CATCH ME..."', { stroke: 0xff2200 });
     catchme.x = 100;
-    catchme.y = 200;
+    catchme.y = 300;
     container.pivot.x = catchme.width / 2;
     container.pivot.y = catchme.height / 2;
     app.stage.addChild(catchme);
