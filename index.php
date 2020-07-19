@@ -43,15 +43,32 @@
   app.renderer.autoResize = true;
   app.renderer.resize(window.innerWidth, window.innerHeight);
 
+  document.body.appendChild(app.view);
+
   const container = new PIXI.Container();
   app.stage.addChild(container);
 
-  PIXI.loader
-  .add(psyduck_image)
-  .add(nabila_image)
-  .on("progress", loadProgressHandler)
-  .load(open);
+  let loading;
 
+  init();
+
+  function init(){
+
+    loading = new PIXI.Text('Loading...', { stroke: 0xff2200 });
+    loading.x = app.screen.width / 2;
+    loading.y = app.screen.height / 2;
+    container.pivot.x = loading.width / 2;
+    container.pivot.y = loading.height / 2;
+    app.stage.addChild(loading);
+
+
+    PIXI.loader
+    .add(psyduck_image)
+    .add(nabila_image)
+    .on("progress", loadProgressHandler)
+    .on("complete", delta =>loadComplete(loading,delta))
+    .load(open);
+  }
 
   //This `setup` function will run when the image has loaded
   function open() {
@@ -86,14 +103,11 @@
     //Add the cat to the stage
     app.stage.addChild(bebek);
     app.ticker.add(delta => gameLoop(bebek,delta));
-
-    document.body.appendChild(app.view);
-
   }
 
   function goToUcapan(bebek,delta) {
     app.stage.removeChild(bebek);
-    ucapan();
+    catchme();
   }
 
   function gameLoop(bebek,delta){
@@ -106,6 +120,73 @@
       bebek.y += bebek.vy;
       bebek.rotation = 0.025;
     }
+  }
+
+  function catchme(){
+
+    catchme = new PIXI.Text('Psyduck : "CATCH ME..."', { stroke: 0xff2200 });
+    catchme.x = 100;
+    catchme.y = 200;
+    container.pivot.x = catchme.width / 2;
+    container.pivot.y = catchme.height / 2;
+    app.stage.addChild(catchme);
+
+    let bebek2 = new Sprite(resources[psyduck_image].texture);
+    bebek2.width = 100;
+    bebek2.height = 160;
+
+    bebek2.x = Math.random() * app.screen.width / 3;
+    bebek2.y = Math.random() * app.screen.height / 2;
+
+    // Opt-in to interactivity
+    bebek2.interactive = true;
+    // Shows hand cursor
+    bebek2.buttonMode = true;
+    // Pointers normalize touch and mouse
+    bebek2.on('pointerdown', tangkep );
+
+    app.stage.addChild(bebek2);
+
+    var hitung = 0;
+    function tangkep(){
+      var random = Math.random();
+      var random2 = Math.random();
+      console.log(random);
+      console.log(random2);
+      console.log(app.screen.width);
+      console.log(app.screen.height);
+      var new_x =  random * app.screen.width / 1.1;
+      var new_y = random2 * app.screen.height / 1.1;
+      if ( new_x > app.screen.width ){
+        var new_x = 20;
+      }
+      if ( new_y > app.screen.height ){
+        var new_y = 100;
+      }
+      console.log(new_x);
+      console.log(new_y);
+      //
+      // function new_x2(){
+      //   return 100;
+      // }
+      // function new_y2(){
+      //   return 200;
+      // }
+      bebek2.x = new_x;
+      bebek2.y = new_y;
+      hitung++;
+      console.log(hitung);
+
+      if ( hitung > 6 ){
+        app.stage.removeChild(bebek2);
+        ucapan();
+      }
+    }
+
+
+
+
+
   }
 
 
@@ -123,8 +204,8 @@
 
     // cat.width = 300;
     // cat.height = 500;
-    nabila.scale.x = 1.5;
-    nabila.scale.y = 1.5;
+    nabila.scale.x = 1.4;
+    nabila.scale.y = 1.4;
 
     //Add the cat to the stage
     app.stage.addChild(nabila);
@@ -132,9 +213,9 @@
 
   function loadProgressHandler() {
     console.log('loading');
-    let basicText = new PIXI.Text('Loading...');
-    basicText.x = app.screen.width / 2;
-    basicText.y = 100;
+  }
+  function loadComplete(loading,delta){
+    loading.visible = false;
   }
 
 </script>
