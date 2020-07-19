@@ -14,7 +14,7 @@
   // window.onload = function (){
   let psyduck_image = 'psd.png';
   let nabila_image = 'nab2.png';
-  var max = getRndInteger(6, 9);
+  var max = getRndInteger(7, 9);
   var muterke = getRndInteger(4, 6);
 
   var textArray = [
@@ -275,7 +275,7 @@
   function terbang2(){
     const aliens = [];
 
-    const totalDudes = 10;
+    const totalDudes = 15;
 
     for (let i = 0; i < totalDudes; i++) {
       // create a new Sprite that uses the image name that we just generated as its source
