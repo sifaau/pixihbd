@@ -19,7 +19,7 @@
 
     PIXI.utils.sayHello(type);
 
-//Aliases for loader 
+//Aliases for loader
 let Application = PIXI.Application,
 loader = PIXI.loader,
   resources = PIXI.loader.resources, // resources
@@ -103,10 +103,6 @@ app.stage.addChild(bebek);
 app.ticker.add(delta => gameLoop(delta));
 }
 
-
-
-
-
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 
@@ -138,11 +134,13 @@ nabila.scale.y = 1.5;
 app.stage.addChild(nabila);
 }
 
-  
+
 }
 
 function loadProgressHandler() {
-  console.log("loading"); 
+  const basicText = new PIXI.Text('Loading...');
+  basicText.x = app.screen.width / 2;
+  basicText.y = 100;
 }
 
 </script>
