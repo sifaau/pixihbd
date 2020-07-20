@@ -13,7 +13,7 @@
   // let app;
   // window.onload = function (){
   let psyduck_image = 'psd.png';
-  let nabila_image = 'nab2.png';
+  let nabila_image = 'nab3.png';
   var max = getRndInteger(7, 9);
   var muterke = getRndInteger(4, 6);
 
