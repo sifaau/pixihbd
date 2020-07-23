@@ -27,5 +27,5 @@
 
 // }
 
-echo json_encode(array('ip'=>$_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT'].' - '.$ipaddress.' - '.$ip));
+echo json_encode(array('ip'=>$ipaddress.' - '.$ip));
  ?>
