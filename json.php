@@ -18,7 +18,14 @@
         $ipaddress = 'UNKNOWN';
     }
 
+    $ip = getenv('HTTP_CLIENT_IP') ?:
+            getenv('HTTP_X_FORWARDED_FOR') ?:
+            getenv('HTTP_X_FORWARDED') ?:
+            getenv('HTTP_FORWARDED_FOR') ?:
+            getenv('HTTP_FORWARDED') ?:
+            getenv('REMOTE_ADDR');
+
 // }
 
-echo json_encode(array('ip'=>$_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT'].' - '.$ipaddress));
+echo json_encode(array('ip'=>$_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT'].' - '.$ipaddress.' - '.$ip));
  ?>
