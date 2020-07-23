@@ -19,5 +19,5 @@ function get_client_ip() {
     return $ipaddress;
 }
 
-echo json_encode(array('ip'=>$_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT']));
+echo json_encode(array('ip'=>$_SERVER['REMOTE_ADDR'].':'.$_SERVER['REMOTE_PORT'].' - '.$ipaddress));
  ?>
